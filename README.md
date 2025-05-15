@@ -4,7 +4,7 @@ Uma aplicação simples de lista de atividades desenvolvida com **React JS** e *
 
 > 💡 Projeto baseado no conteúdo do curso "[Seja Full-Stack com REACT, .NET + EF Core](https://www.udemy.com/course/seja-full-stack-com-react-redux-e-aspnetcore-efcore/)" da plataforma Udemy
 
-"[Meu certificado do curso](https://www.udemy.com/certificate/UC-02bfa6c6-81b6-4da5-b1cd-f4def390ab09/)
+📋 [Meu certificado do curso](https://www.udemy.com/certificate/UC-02bfa6c6-81b6-4da5-b1cd-f4def390ab09/)
 
 ---
 
