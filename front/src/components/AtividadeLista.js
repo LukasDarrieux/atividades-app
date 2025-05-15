@@ -1,4 +1,4 @@
-import Atividade from "./Atividade";
+import AtividadeItem from "./AtividadeItem";
 
 function AtividadeLista(props) {
 
@@ -63,7 +63,7 @@ function AtividadeLista(props) {
         <div className="mt-4">
         {
           props.atividades.map(atividade => (
-            <Atividade 
+            <AtividadeItem 
               key={atividade.id}
               atividade={atividade}
               prioridadeColor={prioridadeColor}

@@ -1,4 +1,4 @@
-function Atividade(props) {
+function AtividadeItem(props) {
     return (
         <div className={"card mb-2 shadow-sm border-" + props.prioridadeColor(props.atividade.prioridade)}>
             <div className="card-body">
@@ -37,4 +37,4 @@ function Atividade(props) {
     );
 }
 
-export default Atividade;
+export default AtividadeItem;
