@@ -11,5 +11,6 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Atividades> Atividades { get; set; }
+    public DbSet<Clientes> Clientes { get; set; }
 
 }
