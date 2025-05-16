@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Atividades_App.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250515030042_MigracaoInicial")]
-    partial class MigracaoInicial
+    [Migration("20250516052824_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,7 +21,7 @@ namespace Atividades_App.API.Migrations
 
             modelBuilder.Entity("Atividades_App.Domain.Entities.Atividades", b =>
                 {
-                    b.Property<int>("AtividadeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -34,7 +34,7 @@ namespace Atividades_App.API.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("AtividadeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Atividades");
                 });

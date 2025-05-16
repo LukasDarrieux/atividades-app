@@ -1,106 +1,147 @@
-import { useState } from "react";
-import AtividadeForm from "../../components/AtividadeForm";
-import AtividadeLista from "../../components/AtividadeLista";
+import { useState, useEffect } from "react";
+import { Button, Modal } from "react-bootstrap";
+import AtividadeForm from "./AtividadeForm";
+import AtividadeLista from "./AtividadeLista";
+import Title from "../../components/Title";
+import api from "../../api/api";
 
 function Atividade() {
 
+    const [showAtividadeModal, setShowAtividadeModal] = useState(false);
+    const [showConfirmModal, setConfirmModal] = useState(false);
+
     const [atividades, setAtividades] = useState([]);
+    const [atividade, setAtividade] = useState({id: 0});
+    
+    function handleAtividadeModal() {
+        setShowAtividadeModal(!showAtividadeModal);
+    }
 
-    function btnAdicionar(e) {
-
-        e.preventDefault();
-
-        const id = parseInt(document.getElementById("id").value)
-        const ativ = atividades.find(a => a.id === id);
-
-        if (ativ === undefined) {
-            adicioneAtividade();
+    function handleConfirmModal(id) {
+        if (id !== 0 && id !== undefined) {
+            const atividade = atividades.find(a => a.id === id);
+            setAtividade(atividade);
         } else {
-            atualizeAtividade(id);
+            setAtividade({id: 0});
         }
-        limpeForm();
+        setConfirmModal(!showConfirmModal);
     }
 
-    function btnCancelar(e) {
-        e.preventDefault();
-
-        limpeForm();
+    async function pegarTodasAtividades() {
+        const response = await api.get("atividades");
+        return response.data;
     }
 
-    function getAtividade(id) {
-        const ativ = atividades.find(a => a.id === id);
-
-        document.getElementById("id").value = ativ.id;
-        document.getElementById("titulo").value = ativ.titulo;
-        document.getElementById("descricao").value = ativ.descricao;
-        document.getElementById("prioridade").value = ativ.prioridade;
-
-        const icone = "<i class='fas fa-save me-2'></i>";
-        document.getElementById("btn").innerHTML = icone + "Salvar";
+    async function adicionarAtividade(ativ) {
+        handleAtividadeModal();
+        ativ.prioridade = parseInt(ativ.prioridade)
+        const response = await api.post("atividades", ativ);
+        setAtividades([...atividades, response.data]);
     }
 
-    function adicioneAtividade() {
+    function cancelarAtividade() {
+        setAtividade({id: 0});
+        handleAtividadeModal();
+    }
 
-        const atividade = {
-            id: getId(),
-            titulo: document.getElementById("titulo").value,
-            descricao: document.getElementById("descricao").value,
-            prioridade: parseInt(document.getElementById("prioridade").value)
+    async function atualizarAtividade(ativ) {
+        handleAtividadeModal();
+        ativ.prioridade = parseInt(ativ.prioridade)
+        const response = await api.put("atividades/" + ativ.id, ativ);
+        const { id } = response.data;
+        setAtividades(
+            atividades.map((item) => (item.id === id ? ativ : item))
+        );
+        setAtividade({id: 0});
+    }
+
+    async function deletarAtividade(id) {
+        handleConfirmModal(0);
+        if (await api.delete("atividades/" + id)) {
+            const atividadesFiltradas = atividades.filter((a) => a.id !== id);
+            setAtividades([...atividadesFiltradas]);
         }
-
-        setAtividades([...atividades, { ...atividade }])
     }
 
-    function atualizeAtividade(id) {
-
-        const atividadesLista = atividades;
-
-        const index = atividadesLista.findIndex(a => a.id === id);
-
-        atividadesLista[index].descricao = document.getElementById("descricao").value;
-        atividadesLista[index].titulo = document.getElementById("titulo").value;
-        atividadesLista[index].prioridade = parseInt(document.getElementById("prioridade").value);
-
-        setAtividades([...atividadesLista]);
+    function pegarAtividade(id) {
+        const atividade = atividades.find(a => a.id == id);
+        setAtividade(atividade);
+        handleAtividadeModal();
     }
 
-    function deletarAtividade(id) {
-        const atividadesFiltradas = atividades.filter(atividade => atividade.id !== id);
-        setAtividades([...atividadesFiltradas]);
+    function novaAtividade() {
+        setAtividade({id: 0});
+        handleAtividadeModal();
     }
 
-    function getId() {
-        if (atividades.length === 0) return 1;
-        return parseInt(atividades[atividades.length - 1].id + 1);
-    }
+    useEffect(() => {
+        const getAtividades = async () => {
+            const todasAtividades = await pegarTodasAtividades();
+            if (todasAtividades) setAtividades(todasAtividades);
+        };
+        getAtividades();
+    }, []);
 
-    function limpeForm() {
-        const VALOR_PADRAO_COMBO = 0;
-
-        document.getElementById("id").value = getId();
-        document.getElementById("titulo").value = "";
-        document.getElementById("descricao").value = "";
-        document.getElementById("prioridade").selectedIndex = VALOR_PADRAO_COMBO;
-
-        const icone = "<i class='fas fa-plus me-2'></i>";
-        document.getElementById("btn").innerHTML = icone + "Adicionar";
-    }
 
     return (
 
         <div className="container mt-3">
 
-            <AtividadeForm 
-                btnAdicionar={btnAdicionar}
-                btnCancelar={btnCancelar}
-                getId={getId}
-            />  
+            <Title title={"Atividade " + (atividade.id !== 0 ? atividade.id : "")}>
+                
+                <Button variant="outline-success" onClick={novaAtividade}>
+                    <i className="fas fa-plus me-2"></i>
+                    Novo
+                </Button>
+            </Title>
 
             <AtividadeLista 
-                getAtividade={getAtividade}
-                deletarAtividade={deletarAtividade}
                 atividades={atividades}
+                pegarAtividade={pegarAtividade}
+                handleConfirmModal={handleConfirmModal}
             />
+
+            <Modal show={showAtividadeModal} onHide={handleAtividadeModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Atividade {atividade.id !== 0 ? atividade.id : "" }
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <AtividadeForm 
+                        adicionarAtividade={adicionarAtividade}
+                        cancelarAtividade={cancelarAtividade}
+                        atualizarAtividade={atualizarAtividade}
+                        ativSelecionada={atividade}
+                        atividades={atividades}
+                    />
+                </Modal.Body>
+            </Modal>
+
+            <Modal show={showConfirmModal} onHide={handleConfirmModal}>
+                <Modal.Header closeButton>
+                    <Modal.Title>
+                        Excluindo Atividade{" "}
+                        {atividade.id !== 0 ? atividade.id : ""}
+                    </Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                    Tem certeza que deseja excluir a atividade {atividade.id}?
+                </Modal.Body>
+
+                <Modal.Footer className="d-flex justify-content-between">
+                    <button className="btn btn-outline-success me-2" onClick={() => deletarAtividade(atividade.id)}>
+                        <i className="fas fa-check me-2"></i>
+                        Sim
+                    </button>
+
+                    <button className="btn btn-outline-danger me-2" onClick={() => handleConfirmModal(0)}>
+                        <i className="fas fa-times me-2"></i>
+                        Não
+                    </button>
+                </Modal.Footer>
+            </Modal>
 
         </div>
     );

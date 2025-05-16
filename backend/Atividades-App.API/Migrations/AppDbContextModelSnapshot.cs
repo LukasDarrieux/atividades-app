@@ -18,7 +18,7 @@ namespace Atividades_App.API.Migrations
 
             modelBuilder.Entity("Atividades_App.Domain.Entities.Atividades", b =>
                 {
-                    b.Property<int>("AtividadeId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -31,7 +31,7 @@ namespace Atividades_App.API.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("AtividadeId");
+                    b.HasKey("Id");
 
                     b.ToTable("Atividades");
                 });

@@ -1,7 +1,9 @@
+import Title from "../../components/Title";
+
 function Cliente() {
     return (
         <div>
-            <h1>Página Cliente</h1>
+            <Title title="Cliente"></Title>
         </div>
     );
 }

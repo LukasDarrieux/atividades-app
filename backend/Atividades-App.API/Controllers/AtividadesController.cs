@@ -47,7 +47,7 @@ namespace Atividades_App.API.Controllers
             _context.Atividades.Add(atividade);
             await _context.SaveChangesAsync();
 
-            return Created();    
+            return Ok(atividade);    
         }
 
         [HttpPut("{id}")]

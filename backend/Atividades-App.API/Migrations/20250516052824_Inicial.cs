@@ -5,7 +5,7 @@
 namespace Atividades_App.API.Migrations
 {
     /// <inheritdoc />
-    public partial class MigracaoInicial : Migration
+    public partial class Inicial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,7 @@ namespace Atividades_App.API.Migrations
                 name: "Atividades",
                 columns: table => new
                 {
-                    AtividadeId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Titulo = table.Column<string>(type: "TEXT", nullable: true),
                     Descricao = table.Column<string>(type: "TEXT", nullable: true),
@@ -22,7 +22,7 @@ namespace Atividades_App.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Atividades", x => x.AtividadeId);
+                    table.PrimaryKey("PK_Atividades", x => x.Id);
                 });
         }
 

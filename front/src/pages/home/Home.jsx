@@ -1,7 +1,9 @@
+import Title from "../../components/Title";
+
 function Home() {
     return (
         <div>
-            <h1>Página Home</h1>
+            <Title title="DashBoard"></Title>
         </div>
     );
 }

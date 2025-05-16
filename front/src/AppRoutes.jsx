@@ -3,7 +3,7 @@ import Cliente from './pages/clientes/Cliente';
 import NotFound from './pages/notFound/NotFound';
 import Home from './pages/home/Home';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Menu from './components/Menu/Menu';
+import Menu from './components/Menu';
 
 function AppRoutes() {
   return (
