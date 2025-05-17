@@ -9,15 +9,15 @@ const atividadeInicial = {
 
 function AtividadeForm(props) {
     
-    const [atividade, setAtividades] = useState(atividadeAtual());  
+    const [atividade, setAtividade] = useState(atividadeAtual());  
 
     useEffect(() => {
-        if (props.ativSelecionada.id !== 0) setAtividades(props.ativSelecionada);
+        if (props.ativSelecionada.id !== 0) setAtividade(props.ativSelecionada);
     }, [props.ativSelecionada]);
 
     const inputTextHandler = (e) => {
         const {id, value} = e.target;
-        setAtividades({...atividade, [id]: value});
+        setAtividade({...atividade, [id]: value});
     };
 
     function handleSubmit(e) {
@@ -27,7 +27,7 @@ function AtividadeForm(props) {
         if (props.ativSelecionada.id !== 0) props.atualizarAtividade(atividade);
         else props.adicionarAtividade(atividade);
 
-        setAtividades(atividadeInicial);
+        setAtividade(atividadeInicial);
     }
 
     function handleCancelar(e) {
@@ -35,7 +35,7 @@ function AtividadeForm(props) {
 
         props.cancelarAtividade();
 
-        setAtividades(atividadeInicial);
+        setAtividade(atividadeInicial);
     }
 
     function atividadeAtual() {

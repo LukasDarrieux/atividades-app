@@ -6,6 +6,8 @@ function AtividadeLista(props) {
     return (
         <div className="mt-4">
         {
+          props.atividades.length > 0
+          ?
           props.atividades.map((atividade) => (
             <AtividadeItem 
               key={atividade.id}
@@ -14,6 +16,8 @@ function AtividadeLista(props) {
               handleConfirmModal={props.handleConfirmModal}
             />
           ))
+          :
+          <h4 className="text-center">Nenhum Atividade Cadastrada</h4>
         }
       </div>
     );

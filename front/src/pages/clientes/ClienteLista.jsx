@@ -1,26 +1,8 @@
-import { useState, useEffect } from "react";
-import api from "../../api/api";
-
 const DESATIVADO = 0;
 const EM_ANALISE = 1;
 const ATIVO = 2;
 
-function ClienteLista() {
-
-    const[clientes, setClientes] = useState([]);
-
-    useEffect(() => {
-        const getClientes = async () => {
-            const todosClientes = await BuscarClientes();
-            if (todosClientes) setClientes(todosClientes)
-        };
-        getClientes();
-    }, []);
-
-    async function BuscarClientes() {
-        const response = await api.get("clientes");
-        return response.data;
-    }
+function ClienteLista(props) {
 
     function getSituacao(situacao) {
         switch (situacao) {
@@ -64,7 +46,7 @@ function ClienteLista() {
 
     return (
         <div className="mt-3">
-            <table className="table table-striped">
+            <table className="table table-striped table-hover cursor-pointer">
                 <thead className="table-dark"> 
                     <tr>
                         <th>Id</th>
@@ -77,7 +59,11 @@ function ClienteLista() {
                     
                 </thead>
                 <tbody>
-                    {clientes.map((cliente) => (
+
+                    {
+                       props.clientes.length > 0 
+                       ? 
+                       props.clientes.map((cliente) => (
                         <tr key={cliente.id}>
                             <td>{cliente.id}</td>
                             <td>{cliente.nome}</td>
@@ -89,19 +75,24 @@ function ClienteLista() {
                             </td>
                             <td>
                                 
-                                <button className="btn btn-outline-primary me-3">
+                                <button className="btn btn-outline-primary me-3" onClick={() => props.getCliente(cliente.id)}>
                                     <i className="fas fa-pen me-2"></i>
                                     Editar
                                 </button>
 
-                                <button className="btn btn-outline-danger">
+                                <button className="btn btn-outline-danger" onClick={() => props.handleClienteConfirm(cliente.id)}>
                                     <i className="fas fa-trash me-2"></i>
                                     Deletar
                                 </button>
                             
                             </td>
                         </tr>
-                    ))}
+                        ))
+                        :
+                        <tr className="text-center">
+                            <td colspan="6">Nenhum cliente cadastrado</td>
+                        </tr>
+                    }
                 </tbody>
                 
             </table>

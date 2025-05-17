@@ -127,7 +127,7 @@ function Atividade() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    Tem certeza que deseja excluir a atividade {atividade.id}?
+                    Tem certeza que deseja excluir a atividade <strong>{atividade.id} - {atividade.titulo}</strong>?
                 </Modal.Body>
 
                 <Modal.Footer className="d-flex justify-content-between">
