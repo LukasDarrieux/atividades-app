@@ -91,7 +91,7 @@ function Atividade() {
                 
                 <Button variant="outline-success" onClick={novaAtividade}>
                     <i className="fas fa-plus me-2"></i>
-                    Novo
+                    Nova Atividade
                 </Button>
             </Title>
 
