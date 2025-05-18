@@ -64,7 +64,7 @@ function Atividade() {
     }
 
     function pegarAtividade(id) {
-        const atividade = atividades.find(a => a.id == id);
+        const atividade = atividades.find(a => a.id === id);
         setAtividade(atividade);
         handleAtividadeModal();
     }

@@ -64,7 +64,8 @@ function ClienteForm(props) {
                     <div className="form-group">
                         <label className="form-label">Situação</label>
                         <select className="form-select" id="situacao" value={cliente.situacao} onChange={handleTextValue}>
-                            <option valueDefault="0">Desativado</option>
+                            <option valueDefault="0">Selecione...</option>
+                            <option value="0">Desativado</option>
                             <option value="1">Em análise</option>
                             <option value="2">Ativo</option>
                         </select>

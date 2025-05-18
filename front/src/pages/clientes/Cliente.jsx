@@ -14,6 +14,7 @@ function Cliente() {
     const[clienteSelecionado, setClienteSelecionado] = useState({id: 0});
 
     function handleClienteModal() {
+        if (showClienteModal) setClienteSelecionado({id: 0});
         setShowClienteModal(!showClienteModal);
     }
 
@@ -47,7 +48,9 @@ function Cliente() {
         setClientes(
             clientes.map(item => (item.id === id ? cliente : item)
         ));
+        setClienteSelecionado({id: 0});
     }
+
 
     async function deletarCliente(id) {
         handleClienteConfirm(0);

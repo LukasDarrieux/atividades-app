@@ -58,9 +58,9 @@ function Home() {
             <div className="row mt-4">
                 <h2 className="mt-4">Clientes</h2>
                 <Cards conteudo={clientes.length} titulo="Clientes" color="secondary"/>
+                <Cards conteudo={getQuantidadeClienteSituacao(2)} titulo="Ativo" color="success"/>
                 <Cards conteudo={getQuantidadeClienteSituacao(0)} titulo="Em Análise" color="primary"/>
                 <Cards conteudo={getQuantidadeClienteSituacao(1)} titulo="Desativado" color="danger"/>
-                <Cards conteudo={getQuantidadeClienteSituacao(2)} titulo="Ativo" color="success"/>
             </div>
 
             <div className="row mt-4">
