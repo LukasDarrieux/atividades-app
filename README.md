@@ -1,6 +1,6 @@
 # 📚 Atividades App
 
-Uma aplicação simples de lista de atividades desenvolvida com **React JS** e **.NET Core**, onde é possível **adicionar**, **listar**, **atualizar** e **excluir** atividades. Este projeto foi desenvolvido com o objetivo de praticar os conceitos iniciais do React JS e o uso de uma API RestFull em .NET Core.
+Uma aplicação simples de lista de atividades e clientes desenvolvida com **React JS** e **.NET Core**, onde é possível **adicionar**, **listar**, **atualizar** e **excluir** atividades e clientes. Este projeto foi desenvolvido com o objetivo de praticar os conceitos iniciais do React JS e o uso de uma API RestFull em .NET Core.
 
 > 💡 Projeto baseado no conteúdo do curso "[Seja Full-Stack com REACT, .NET + EF Core](https://www.udemy.com/course/seja-full-stack-com-react-redux-e-aspnetcore-efcore/)" da plataforma Udemy
 
@@ -15,6 +15,13 @@ Este projeto tem como finalidade aplicar e reforçar os conhecimentos iniciais e
 ---
 
 ## 💻 Funcionalidades
+
+- ✅ Dashboard com indicadores 
+
+- ✅ Adicionar um novo cliente  
+- ✅ Listar todos os clientes
+- ✅ Atualizar um cliente existente  
+- ✅ Excluir um cliente da lista  
 
 - ✅ Adicionar uma nova atividade  
 - ✅ Listar todas as atividades  
